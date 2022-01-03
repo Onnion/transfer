@@ -1,4 +1,5 @@
 import { NestFactory } from '@nestjs/core';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 
 const { TRANSFER_APP_PORT } = process.env;
@@ -6,7 +7,15 @@ const { TRANSFER_APP_PORT } = process.env;
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix('api');
-  
-  await app.listen(TRANSFER_APP_PORT);
+
+  const config = new DocumentBuilder()
+    .setTitle('Serviço de transferências')
+    .setDescription('Serviço de transferências feito para desafio BTG-Pactual')
+    .build();
+
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('/api/doc/', app, document);
+
+  await app.listen(+TRANSFER_APP_PORT);
 }
 bootstrap();

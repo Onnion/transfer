@@ -1,5 +1,5 @@
 #!/bin/bash
 cd /home/node/app/
-yarn install
+npm i --no-progress
 
-yarn start:dev
+npm run start:dev
