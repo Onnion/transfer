@@ -6,22 +6,14 @@ on:
       # - master
       - code-climate
   pull_request: {}
-  workflow_dispatch:
 
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
+      - name: Test and send test coverage to Code Climate
+        uses: paambaati/codeclimate-action@v3.0.0
         with:
-          node-version: ${{ matrix.node-version }}
-      - name: Install dependencies
-        run: npm ci
-      - run: npm test
-      - uses: amancevice/setup-code-climate@v0
-        with:
-          cc_test_reporter_id: ${{ secrets.CC_TEST_REPORTER_ID }}
-      - run: cc-test-reporter before-build
-      - run: cc-test-reporter after-build
+          coverageCommand: npm run test
+          debug: true
+          coverageLocations: ${{github.workspace}}/*.lcov:lcov
