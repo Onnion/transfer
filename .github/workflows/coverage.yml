@@ -3,9 +3,11 @@ name: My tests workflow
 on:
   push:
     branches:
-      # - master
-      - code-climate
-  pull_request: {}
+      - main
+  pull_request:
+   branches:
+      - main
+      - develop
 
 jobs:
   test:
