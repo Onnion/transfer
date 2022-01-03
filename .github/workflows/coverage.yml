@@ -3,8 +3,7 @@ name: My tests workflow
 on:
   push:
     branches:
-      # - master
-      - code-climate
+      - main
   pull_request: {}
 
 jobs:
