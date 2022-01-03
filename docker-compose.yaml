@@ -2,12 +2,12 @@ version: "3"
 
 services:
   app:
-    build: ./services/transfer-app/.docker/
+    build: ./.docker/
     container_name: transfer_app
     env_file:
         .env
     ports:
       - ${TRANSFER_APP_PORT}:${TRANSFER_APP_PORT}
     volumes:
-        - ./services/transfer-app:/home/node/transfer-app
+        - ./:/home/node/transfer-app
     entrypoint: ./.docker/entrypoint.sh
