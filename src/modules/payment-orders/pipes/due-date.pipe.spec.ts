@@ -27,7 +27,7 @@ describe('DueDatePipe', () => {
         dueDate: '2020-12-12',
       };
 
-      const response = await pipe.transform(valueToValidate);
+      await pipe.transform(valueToValidate);
     } catch (error) {
       expect(error).toBeInstanceOf(HttpException);
       expect(error.status).toBe(405);
