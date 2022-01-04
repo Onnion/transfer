@@ -11,6 +11,8 @@ describe('BankingService', () => {
   let httpService: HttpService;
 
   beforeEach(async () => {
+    jest.spyOn(console, 'error').mockImplementation(() => {});
+
     const module: TestingModule = await Test.createTestingModule({
       imports: [HttpModule],
       providers: [BankingService],

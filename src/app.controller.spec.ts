@@ -5,6 +5,8 @@ describe('AppController', () => {
   let appController: AppController;
 
   beforeEach(async () => {
+    jest.spyOn(console, 'error').mockImplementation(() => {});
+
     const app: TestingModule = await Test.createTestingModule({
       controllers: [AppController],
     }).compile();
