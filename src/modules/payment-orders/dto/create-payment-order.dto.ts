@@ -1,26 +1,33 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsDateString, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
+import {
+  IsDateString,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 
 export class CreatePaymentOrderDto {
   @ApiProperty({
-    description: 'Id externo da transferência'
+    description: 'Id externo da transferência',
+    example: 1,
   })
   @IsNumber()
   @IsNotEmpty()
-  externalId: number; 
+  externalId: number;
 
   @ApiProperty({
     description: 'Quantidade em centavos da transferência (100 -> R$ 1,00)',
-    example: '100'
+    example: 100,
   })
   @IsNumber()
   @IsNotEmpty()
-  amount:  number;
+  amount: number;
 
   @ApiProperty({
     description: 'Data da liquidação da transferência',
     example: '2021-12-25',
-    format: 'yyyy-MM-DD'
+    format: 'yyyy-MM-DD',
   })
   @IsDateString()
   @IsString()
