@@ -7,5 +7,6 @@ export type MockType<T> = {
 export const repositoryMockFactory: () => MockType<Model<any>> = jest.fn(
   () => ({
     create: jest.fn((entity) => entity),
+    findOne: jest.fn((entity) => entity),
   }),
 );

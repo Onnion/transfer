@@ -21,7 +21,8 @@ export class BankingService {
 
       return response.data;
     } catch (error) {
-      // @TODO LOG
+      // @TODO log
+      console.error(error);
       throw new InternalServerErrorException(
         'Error interno no serviço de transferência',
       );

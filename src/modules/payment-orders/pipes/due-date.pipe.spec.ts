@@ -7,6 +7,8 @@ describe('DueDatePipe', () => {
   let pipe: DueDatePipe;
 
   beforeEach(async () => {
+    jest.spyOn(console, 'error').mockImplementation(() => {});
+
     const app: TestingModule = await Test.createTestingModule({
       providers: [DueDatePipe],
     }).compile();

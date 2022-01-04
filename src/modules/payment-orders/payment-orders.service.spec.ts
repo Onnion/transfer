@@ -1,5 +1,8 @@
 import { HttpModule } from '@nestjs/axios';
-import { InternalServerErrorException } from '@nestjs/common';
+import {
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { getModelToken } from '@nestjs/mongoose';
 import { Test, TestingModule } from '@nestjs/testing';
 import { BankingService } from '../banking/banking.service';
@@ -16,6 +19,8 @@ describe('PaymentOrdersService', () => {
   let bankingService: BankingService;
 
   beforeEach(async () => {
+    jest.spyOn(console, 'error').mockImplementation(() => {});
+
     const module: TestingModule = await Test.createTestingModule({
       imports: [HttpModule],
       providers: [
@@ -85,6 +90,22 @@ describe('PaymentOrdersService', () => {
       expect(logServiceSpy).toHaveBeenCalledWith(result);
 
       expect(result).toMatchObject({ ...data, ...bankingResponse });
+    });
+  });
+
+  describe('getOne', () => {
+    it('should return 404 error if interId is not registered', async () => {
+      try {
+        const internalId = '31654014-5b20-4301-aaa6-90401b052a6b';
+        const spyGet = jest
+          .spyOn(logService, 'get')
+          .mockResolvedValueOnce(null);
+        await service.getOne(internalId);
+        expect(spyGet).toHaveBeenCalledTimes(1);
+        expect(spyGet).toHaveBeenCalledWith({ internalId });
+      } catch (error) {
+        expect(error).toBeInstanceOf(NotFoundException);
+      }
     });
   });
 });

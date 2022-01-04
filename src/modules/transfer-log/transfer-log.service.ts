@@ -14,4 +14,8 @@ export class TransferLogService {
   async commit(data: CreatePaymentOrderResponse): Promise<void> {
     this.logModel.create(data);
   }
+
+  async get(params = {}): Promise<TransferLogDocument> {
+    return this.logModel.findOne(params);
+  }
 }
