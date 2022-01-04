@@ -15,7 +15,7 @@ export class DueDatePipe implements PipeTransform<CreatePaymentOrderDto> {
     return dueDate >= now;
   }
 
-  async transform(value: CreatePaymentOrderDto): Promise<boolean> {
+  async transform(value: CreatePaymentOrderDto): Promise<CreatePaymentOrderDto> {
     const { dueDate: dueDateParam } = value;
 
     if (!!dueDateParam) {
@@ -29,6 +29,6 @@ export class DueDatePipe implements PipeTransform<CreatePaymentOrderDto> {
       }
     }
 
-    return !!value;
+    return value;
   }
 }

@@ -11,19 +11,18 @@ export class BankingService {
   constructor(private readonly httpService: HttpService) {}
 
   async register(
-    createPaymentOrderDto: CreatePaymentOrderDto,
+    createPaymentOrderDto?: CreatePaymentOrderDto,
   ): Promise<RegisterPaymentOrderResponseType> {
     try {
-      const url = `${process.env.TZ}/${this.path}`;
-      const response = await firstValueFrom(
-        this.httpService.post<RegisterPaymentOrderResponseType>(
-          url,
-          createPaymentOrderDto,
-        ),
-      );
+      const url = `${process.env.BANKING_URL}/${this.path}`;
+      const observableResponse = this.httpService.post(
+        url
+      )
+      const response = await firstValueFrom(observableResponse);
 
       return response.data;
     } catch (error) {
+      // @TODO LOG
       throw new InternalServerErrorException(
         'Error interno no serviço de transferência',
       );
