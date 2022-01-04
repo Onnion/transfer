@@ -1,13 +1,35 @@
 version: "3"
 
 services:
+  mongo:
+    build: ./mongo/.docker/
+    container_name: transfer_mongo
+    env_file: .env
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+    ports:
+      - 27017:27017
+    volumes:
+      - ./mongo/data/db:/data/db
+    networks:
+      - transfer-network
+    command: [ --auth ]
+
   app:
     build: ./.docker/
     container_name: transfer_app
-    env_file:
-        .env
+    env_file: .env
     ports:
       - ${TRANSFER_APP_PORT}:${TRANSFER_APP_PORT}
     volumes:
-        - ./:/home/node/transfer-app
+      - ./:/home/node/transfer-app
     entrypoint: ./.docker/entrypoint.sh
+    depends_on:
+      - mongo
+    networks:
+      - transfer-network
+
+networks:
+  transfer-network:
+    driver: bridge
