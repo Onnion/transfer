@@ -2,17 +2,17 @@ import { RegisterPaymentOrderResponseType } from '../../banking/types/register-p
 import { CreatePaymentOrderDto } from './create-payment-order.dto';
 
 export class CreatePaymentOrderResponse {
-  private internalId: string;
+  internalId: string;
 
-  private externalId: number;
+  externalId: number;
 
-  private status: 'CREATED' | 'APPROVED' | 'SCHEDULED' | 'REJECTED';
+  status: 'CREATED' | 'APPROVED' | 'SCHEDULED' | 'REJECTED';
 
-  private amount: number;
+  amount: number;
 
-  private expectedOn: string;
+  expectedOn: string;
 
-  private dueDate: string;
+  dueDate: string;
 
   constructor(
     banking: RegisterPaymentOrderResponseType,

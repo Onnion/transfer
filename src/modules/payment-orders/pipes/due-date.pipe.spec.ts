@@ -44,7 +44,7 @@ describe('DueDatePipe', () => {
 
     const response = await pipe.transform(valueToValidate);
 
-    expect(response).toBe(true);
+    expect(response).toMatchObject(valueToValidate);
   });
 
   it('should be true when dueDate is not defined', async () => {
@@ -56,6 +56,6 @@ describe('DueDatePipe', () => {
 
     const response = await pipe.transform(valueToValidate);
 
-    expect(response).toBe(true);
+    expect(response).toMatchObject(valueToValidate);
   });
 });

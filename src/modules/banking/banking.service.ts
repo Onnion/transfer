@@ -15,9 +15,8 @@ export class BankingService {
   ): Promise<RegisterPaymentOrderResponseType> {
     try {
       const url = `${process.env.BANKING_URL}/${this.path}`;
-      const observableResponse = this.httpService.post(
-        url
-      )
+      const observableResponse =
+        this.httpService.post<RegisterPaymentOrderResponseType>(url);
       const response = await firstValueFrom(observableResponse);
 
       return response.data;

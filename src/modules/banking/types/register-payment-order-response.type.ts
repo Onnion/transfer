@@ -3,5 +3,5 @@ export type RegisterPaymentOrderResponseType = {
 
   status: 'CREATED' | 'APPROVED' | 'SCHEDULED' | 'REJECTED';
 
-  id: number;
+  id?: number;
 };

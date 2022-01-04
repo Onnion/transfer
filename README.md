@@ -11,7 +11,7 @@
 2. Crie o arquivo `.env` e cole o conteudo copiado
 2. Altere as permissões dos arquivos `.sh` com o seguinte comando:
 ```bash
-chmod +x services/**/.docker/*.sh
+chmod +x ./docker/*.sh
 ```
 
 ## Rodando o projeto
