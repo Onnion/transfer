@@ -1,11 +1,13 @@
-name: My tests workflow
+name: Unit Tests
 
 on:
   push:
     branches:
-      # - master
-      - code-climate
-  pull_request: {}
+      - main
+  pull_request:
+    branches:
+      - main
+      - develop
 
 jobs:
   test:
