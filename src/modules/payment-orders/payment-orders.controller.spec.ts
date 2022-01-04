@@ -1,4 +1,10 @@
+import { HttpModule } from '@nestjs/axios';
+import { getModelToken } from '@nestjs/mongoose';
 import { Test, TestingModule } from '@nestjs/testing';
+import { BankingService } from '../banking/banking.service';
+import { repositoryMockFactory } from '../core/helpers/repository-factory.mock';
+import { TransferLog } from '../transfer-log/entity/transfer-log.entity';
+import { TransferLogService } from '../transfer-log/transfer-log.service';
 import { CreatePaymentOrderDto } from './dto/create-payment-order.dto';
 import { PaymentOrdersController } from './payment-orders.controller';
 import { PaymentOrdersService } from './payment-orders.service';
@@ -10,7 +16,16 @@ describe('PaymentOrdersController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [PaymentOrdersController],
-      providers: [PaymentOrdersService],
+      imports: [HttpModule],
+      providers: [
+        PaymentOrdersService,
+        BankingService,
+        TransferLogService,
+        {
+          provide: getModelToken(TransferLog.name),
+          useFactory: repositoryMockFactory,
+        },
+      ],
     }).compile();
 
     controller = module.get<PaymentOrdersController>(PaymentOrdersController);

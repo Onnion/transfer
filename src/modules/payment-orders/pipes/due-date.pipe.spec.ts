@@ -8,7 +8,7 @@ describe('DueDatePipe', () => {
 
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
-      providers: [DueDatePipe]
+      providers: [DueDatePipe],
     }).compile();
 
     pipe = app.get<DueDatePipe>(DueDatePipe);
@@ -24,10 +24,10 @@ describe('DueDatePipe', () => {
         amount: 100,
         expectedOn: '2025-12-12',
         externalId: 1,
-        dueDate: '2020-12-12'
-      }
-  
-      const response = await pipe.transform(valueToValidate);
+        dueDate: '2020-12-12',
+      };
+
+      await pipe.transform(valueToValidate);
     } catch (error) {
       expect(error).toBeInstanceOf(HttpException);
       expect(error.status).toBe(405);
@@ -39,12 +39,12 @@ describe('DueDatePipe', () => {
       amount: 100,
       expectedOn: '2025-12-12',
       externalId: 1,
-      dueDate: '2025-12-12'
-    }
+      dueDate: '2025-12-12',
+    };
 
     const response = await pipe.transform(valueToValidate);
 
-    expect(response).toBe(true);
+    expect(response).toMatchObject(valueToValidate);
   });
 
   it('should be true when dueDate is not defined', async () => {
@@ -52,10 +52,10 @@ describe('DueDatePipe', () => {
       amount: 100,
       expectedOn: '2025-12-12',
       externalId: 1,
-    }
+    };
 
     const response = await pipe.transform(valueToValidate);
 
-    expect(response).toBe(true);
+    expect(response).toMatchObject(valueToValidate);
   });
 });
