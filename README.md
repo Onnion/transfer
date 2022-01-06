@@ -7,6 +7,10 @@
 ## Dependências do projeto
 1. [Docker](https://www.digitalocean.com/community/tutorials/como-instalar-e-usar-o-docker-no-ubuntu-18-04-pt)
 1. [Docker-compose](https://www.digitalocean.com/community/tutorials/how-to-install-docker-compose-on-ubuntu-18-04-pt)
+1. [MockAPI](https://mockapi.io)
+
+Utilize o seguinte template para criar sua banking_api  
+![Diagrama de sequència](/public/assets/docs/images/schema_banking_api.png)
 
 ## Pré requisitos
 1. Copie o conteudo do arquivo `.env.default`

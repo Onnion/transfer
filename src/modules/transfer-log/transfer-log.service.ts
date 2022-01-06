@@ -1,4 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import {
+  Injectable,
+  InternalServerErrorException,
+  Logger,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CreatePaymentOrderResponse } from '../payment-orders/dto/create-payment-order-response.dto';
@@ -12,10 +16,21 @@ export class TransferLogService {
   ) {}
 
   async commit(data: CreatePaymentOrderResponse): Promise<void> {
-    this.logModel.create(data);
+    try {
+      await this.logModel.create(data);
+    } catch (error) {
+      Logger.error(error.message, 'transfer-log.service.ts - commit');
+      throw new InternalServerErrorException(error.message);
+    }
   }
 
   async get(params = {}): Promise<TransferLogDocument> {
-    return this.logModel.findOne(params);
+    try {
+      const transfer = await this.logModel.findOne(params);
+      return transfer;
+    } catch (error) {
+      Logger.error(error.message, 'transfer-log.service.ts - get');
+      throw new InternalServerErrorException(error.message);
+    }
   }
 }

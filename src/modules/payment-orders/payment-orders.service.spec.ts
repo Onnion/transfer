@@ -1,6 +1,8 @@
 import { HttpModule } from '@nestjs/axios';
 import {
+  HttpStatus,
   InternalServerErrorException,
+  Logger,
   NotFoundException,
 } from '@nestjs/common';
 import { getModelToken } from '@nestjs/mongoose';
@@ -19,7 +21,7 @@ describe('PaymentOrdersService', () => {
   let bankingService: BankingService;
 
   beforeEach(async () => {
-    jest.spyOn(console, 'error').mockImplementation(() => {});
+    jest.spyOn(Logger, 'error').mockImplementation(() => {});
 
     const module: TestingModule = await Test.createTestingModule({
       imports: [HttpModule],
@@ -61,6 +63,7 @@ describe('PaymentOrdersService', () => {
         await service.create(data);
       } catch (error) {
         expect(error).toBeInstanceOf(InternalServerErrorException);
+        expect(error.status).toBe(HttpStatus.INTERNAL_SERVER_ERROR);
       }
     });
 
@@ -105,6 +108,7 @@ describe('PaymentOrdersService', () => {
         expect(spyGet).toHaveBeenCalledWith({ internalId });
       } catch (error) {
         expect(error).toBeInstanceOf(NotFoundException);
+        expect(error.status).toBe(HttpStatus.NOT_FOUND);
       }
     });
   });

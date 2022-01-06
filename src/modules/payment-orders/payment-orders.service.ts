@@ -34,10 +34,8 @@ export class PaymentOrdersService {
 
       return response;
     } catch (error) {
-      Logger.log(error.message, 'payment-orders.service.ts');
-      throw new InternalServerErrorException(
-        'Error interno no serviço de transferência',
-      );
+      Logger.error(error.message, 'payment-orders.service.ts - create');
+      throw new InternalServerErrorException(error.message);
     }
   }
 
@@ -46,6 +44,7 @@ export class PaymentOrdersService {
     const transferData = await this.logService.get(params);
 
     if (!transferData) {
+      Logger.error(params, 'Recurso não encontrado');
       throw new NotFoundException('Recurso não encontrado');
     }
 
