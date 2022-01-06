@@ -1,4 +1,4 @@
-import { HttpException } from '@nestjs/common';
+import { HttpException, HttpStatus, Logger } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { CreatePaymentOrderDto } from '../dto/create-payment-order.dto';
 import { DueDatePipe } from './due-date.pipe';
@@ -7,7 +7,7 @@ describe('DueDatePipe', () => {
   let pipe: DueDatePipe;
 
   beforeEach(async () => {
-    jest.spyOn(console, 'error').mockImplementation(() => {});
+    jest.spyOn(Logger, 'error').mockImplementation(() => {});
 
     const app: TestingModule = await Test.createTestingModule({
       providers: [DueDatePipe],
@@ -32,7 +32,7 @@ describe('DueDatePipe', () => {
       await pipe.transform(valueToValidate);
     } catch (error) {
       expect(error).toBeInstanceOf(HttpException);
-      expect(error.status).toBe(405);
+      expect(error.status).toBe(HttpStatus.METHOD_NOT_ALLOWED);
     }
   });
 

@@ -5,14 +5,18 @@ import { CreatePaymentOrderDto } from '../payment-orders/dto/create-payment-orde
 import { BankingService } from './banking.service';
 import { RegisterPaymentOrderResponseType } from './types/register-payment-order-response.type';
 import { AxiosResponse } from 'axios';
-import { InternalServerErrorException } from '@nestjs/common';
+import {
+  HttpStatus,
+  InternalServerErrorException,
+  Logger,
+} from '@nestjs/common';
 
 describe('BankingService', () => {
   let service: BankingService;
   let httpService: HttpService;
 
   beforeEach(async () => {
-    jest.spyOn(console, 'error').mockImplementation(() => {});
+    jest.spyOn(Logger, 'error').mockImplementation(() => {});
 
     const module: TestingModule = await Test.createTestingModule({
       imports: [HttpModule],
@@ -69,6 +73,7 @@ describe('BankingService', () => {
         await service.register(data);
       } catch (error) {
         expect(error).toBeInstanceOf(InternalServerErrorException);
+        expect(error.status).toBe(HttpStatus.INTERNAL_SERVER_ERROR);
       }
     });
   });

@@ -1,16 +1,12 @@
 import { HttpModule } from '@nestjs/axios';
+import { Logger } from '@nestjs/common';
 import { getModelToken } from '@nestjs/mongoose';
 import { Test, TestingModule } from '@nestjs/testing';
 import { BankingService } from '../banking/banking.service';
 import { repositoryMockFactory } from '../core/helpers/repository-factory.mock';
-import {
-  TransferLog,
-  TransferLogDocument,
-} from '../transfer-log/entity/transfer-log.entity';
+import { TransferLog } from '../transfer-log/entity/transfer-log.entity';
 import { TransferLogService } from '../transfer-log/transfer-log.service';
 import { CreatePaymentOrderDto } from './dto/create-payment-order.dto';
-import { ListPaymentOrderResponse } from './dto/list-payment-order-response.dto';
-import { TransferStatus } from './enum/transfer-status.enum';
 import { PaymentOrdersController } from './payment-orders.controller';
 import { PaymentOrdersService } from './payment-orders.service';
 
@@ -19,7 +15,7 @@ describe('PaymentOrdersController', () => {
   let service: PaymentOrdersService;
 
   beforeEach(async () => {
-    jest.spyOn(console, 'error').mockImplementation(() => {});
+    jest.spyOn(Logger, 'error').mockImplementation(() => {});
 
     const module: TestingModule = await Test.createTestingModule({
       controllers: [PaymentOrdersController],

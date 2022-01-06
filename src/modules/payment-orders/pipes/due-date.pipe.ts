@@ -25,7 +25,7 @@ export class DueDatePipe implements PipeTransform<CreatePaymentOrderDto> {
 
       if (!isValid) {
         throw new HttpException(
-          'Erro de Negócio',
+          'Data de vencimento inválida',
           HttpStatus.METHOD_NOT_ALLOWED,
         );
       }

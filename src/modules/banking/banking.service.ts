@@ -25,9 +25,9 @@ export class BankingService {
 
       return response.data;
     } catch (error) {
-      Logger.log(error.message, 'banking.service.ts');
+      Logger.log(error, 'banking.service.ts - register');
       throw new InternalServerErrorException(
-        'Error interno no serviço de transferência',
+        'Erro mo processo de integração com banking_api ',
       );
     }
   }
