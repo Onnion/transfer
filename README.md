@@ -6,7 +6,6 @@
 ## Dependências do projeto
 1. [Docker](https://www.digitalocean.com/community/tutorials/como-instalar-e-usar-o-docker-no-ubuntu-18-04-pt)
 1. [Docker-compose](https://www.digitalocean.com/community/tutorials/how-to-install-docker-compose-on-ubuntu-18-04-pt)
-2. 
 
 ## Pré requisitos
 1. Copie o conteudo do arquivo `.env.default`
@@ -22,7 +21,7 @@ $ docker-compose up
 $ docker-compose up -d
 ```
 ## Documentação da api
-[Documentação Swagger](http://localhost:3010/api/doc)
+[Documentação Swagger](https://transfer-app-staging.herokuapp.com/api/doc/)
 
 ## Artefatos do projeto
 
