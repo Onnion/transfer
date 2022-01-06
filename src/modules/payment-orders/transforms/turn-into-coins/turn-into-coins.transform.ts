@@ -1,7 +1,8 @@
+// eslint-disable-next-line import/named
 import { TransformFnParams } from 'class-transformer';
 import { IS_FLOAT_CURRENCY } from '../../../core/regex/amount.regex';
 
-export const TurnIntoCoins = (params: TransformFnParams) => {
+export const TurnIntoCoins = (params: TransformFnParams): number => {
   let amount = params.value;
   const amountStr = `${amount}`;
 
@@ -9,5 +10,5 @@ export const TurnIntoCoins = (params: TransformFnParams) => {
     amount = amount * 100;
   }
 
-  return `${amount}`;
+  return amount;
 };
