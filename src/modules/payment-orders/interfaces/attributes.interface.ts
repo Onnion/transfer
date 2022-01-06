@@ -11,5 +11,5 @@ export interface Attributes {
 
   expectedOn: string;
 
-  dueDate: string;
+  dueDate?: string;
 }

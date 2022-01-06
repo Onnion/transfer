@@ -31,7 +31,7 @@ export class CreatePaymentOrderDto {
 
   @ApiProperty({
     description: 'Data da liquidação da transferência',
-    example: '2021-12-25',
+    example: '2025-12-25',
     format: 'yyyy-MM-DD',
   })
   @IsDateString()
@@ -41,7 +41,7 @@ export class CreatePaymentOrderDto {
 
   @ApiProperty({
     description: 'Data de vencimento da transferência',
-    example: '2021-12-25',
+    example: '2025-12-25',
     format: 'yyyy-MM-DD',
     required: false,
   })
