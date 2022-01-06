@@ -1,6 +1,7 @@
 import {
   Injectable,
   InternalServerErrorException,
+  Logger,
   NotFoundException,
 } from '@nestjs/common';
 import { BankingService } from '../banking/banking.service';
@@ -33,8 +34,7 @@ export class PaymentOrdersService {
 
       return response;
     } catch (error) {
-      // @TODO log
-      console.error(error);
+      Logger.log(error.message, 'payment-orders.service.ts');
       throw new InternalServerErrorException(
         'Error interno no serviço de transferência',
       );
