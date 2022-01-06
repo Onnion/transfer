@@ -58,5 +58,15 @@ describe('TransferLogService', () => {
       );
       expect(response).toMatchObject(transfer);
     });
+
+    it('should call findOne method with default param value', async () => {
+      const defaultParam = {};
+      const modelSpy = jest.spyOn(transferMock, 'findOne');
+
+      await service.get();
+
+      expect(modelSpy).toBeCalledTimes(1);
+      expect(modelSpy).toHaveBeenCalledWith(defaultParam);
+    });
   });
 });

@@ -12,16 +12,20 @@ Feature: Registro de transferência
     Then uma 'resposta' de <resposta> e um 'status code' de <status_code> devem ser retornados
     Examples:
       | vencimento | resposta | status_code |
-      | menor      | erro     |         405 |
-      | maior      | sucesso  |         201 |
+      | menor      | erro     | 405         |
+      | maior      | sucesso  | 201         |
 
+  Scenario: Transferência com amount inválido
+    Given que realizo uma request de transferência
+    When for verificado que o 'amount' possui mais que '2' casas decimais
+    Then uma mensagem informando que o campo está inválido, deve ser retornada
 
-  # Scenario: Transferência com data de liquidação
-  #   Examples:
-  #       | data de liquidação |  Header 3 |
-  #       | passada            |  Value 3  |
-  #       | presente           |  Value 3  |
-  #       | futuro             |  Value 3  |
+# Scenario: Transferência com data de liquidação
+#   Examples:
+#       | data de liquidação |  Header 3 |
+#       | passada            |  Value 3  |
+#       | presente           |  Value 3  |
+#       | futuro             |  Value 3  |
 
 Feature: Listagem de transferências
   Scenario: Retornar uma transferência
@@ -31,5 +35,5 @@ Feature: Listagem de transferências
     And o payload <payload>
     Examples:
       | status cadastro | resposta | status_code | payload         |
-      | não cadastrado  | sucesso  |        200  | a transferência |
-      | cadastrado      | sucesso  |        500  | vazio           |
+      | não cadastrado  | sucesso  | 200         | a transferência |
+      | cadastrado      | sucesso  | 500         | vazio           |

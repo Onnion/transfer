@@ -5,6 +5,7 @@ import { CreatePaymentOrderDto } from '../payment-orders/dto/create-payment-orde
 import { BankingService } from './banking.service';
 import { RegisterPaymentOrderResponseType } from './types/register-payment-order-response.type';
 import { AxiosResponse } from 'axios';
+import { InternalServerErrorException } from '@nestjs/common';
 
 describe('BankingService', () => {
   let service: BankingService;
@@ -56,17 +57,18 @@ describe('BankingService', () => {
 
     it('should return InternalServerErrorException error when process excecute with error', async () => {
       try {
-        const error = new Error('');
+        const error: any = new Error('');
         const data: CreatePaymentOrderDto = {
           amount: 100,
           expectedOn: '2025-12-12',
           externalId: 1,
           dueDate: '2025-12-12',
         };
-        (httpService as jest.Mocked<any>).post.mockRejectedValueOnce(error);
+
+        jest.spyOn(httpService, 'post').mockReturnValueOnce(error);
         await service.register(data);
       } catch (error) {
-        expect(error).toBeInstanceOf(TypeError);
+        expect(error).toBeInstanceOf(InternalServerErrorException);
       }
     });
   });
