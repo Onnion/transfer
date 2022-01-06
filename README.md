@@ -28,7 +28,7 @@ $ docker-compose up -d
 ### 1. Collection Postman
 [Collection Postman](https://www.getpostman.com/collections/41d2149b9d949e37e199)
 
-[Enviroment](encurtador.com.br/uNZ02)
+[Enviroment](https://spotiy-share-music-generator.s3.sa-east-1.amazonaws.com/transfer-app-staging.postman_environment.json)
 
 ### 2. Diagrama de sequência
 ![Diagrama de sequència](/public/assets/docs/images/diagrama_de_sequencia.png)
