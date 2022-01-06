@@ -2,7 +2,7 @@
 import { registerDecorator, ValidationOptions } from 'class-validator';
 import { INVALID_DIGITS } from '../../core/regex/amount.regex';
 
-export const validator = (value: number): boolean => {
+export const validate = (value: number): boolean => {
   return !INVALID_DIGITS.test(`${value}`);
 };
 
@@ -13,7 +13,9 @@ export function IsValidCurrency(validationOptions?: ValidationOptions) {
       propertyName: propertyName,
       constraints: [],
       options: validationOptions,
-      validator,
+      validator: {
+        validate,
+      },
     });
   };
 }
