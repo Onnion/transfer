@@ -5,7 +5,7 @@ export interface Attributes {
 
   externalId: number;
 
-  status: TransferStatus;
+  status: string;
 
   amount: number;
 
