@@ -23,5 +23,5 @@ export abstract class PaymentOrderAttributes
   })
   @IsNotEmpty()
   @IsEnum(TransferStatus)
-  status: TransferStatus;
+  status: string;
 }
