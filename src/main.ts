@@ -6,7 +6,9 @@ import { AppModule } from './app.module';
 const { TRANSFER_APP_PORT } = process.env;
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {
+    cors: false,
+  });
 
   app.setGlobalPrefix('api');
   app.useGlobalPipes(
