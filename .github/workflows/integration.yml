@@ -1,0 +1,19 @@
+name: Integration Tests
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  newman:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14]
+    steps:
+      - uses: actions/checkout@master
+      - uses: matt-ball/newman-action@master
+        with:
+          collection: https://www.getpostman.com/collections/41d2149b9d949e37e199
+          environment: https://spotiy-share-music-generator.s3.sa-east-1.amazonaws.com/transfer-app-staging.postman_environment.json
