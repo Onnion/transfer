@@ -1,3 +1,4 @@
+import { Logger } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppController } from './app.controller';
 
@@ -5,7 +6,7 @@ describe('AppController', () => {
   let appController: AppController;
 
   beforeEach(async () => {
-    jest.spyOn(console, 'error').mockImplementation(() => {});
+    jest.spyOn(Logger, 'error').mockImplementation(() => {});
 
     const app: TestingModule = await Test.createTestingModule({
       controllers: [AppController],
