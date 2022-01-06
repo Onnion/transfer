@@ -1,5 +1,9 @@
 import { HttpService } from '@nestjs/axios';
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import {
+  Injectable,
+  InternalServerErrorException,
+  Logger,
+} from '@nestjs/common';
 import { firstValueFrom } from 'rxjs';
 import { CreatePaymentOrderDto } from '../payment-orders/dto/create-payment-order.dto';
 import { RegisterPaymentOrderResponseType } from './types/register-payment-order-response.type';
@@ -21,8 +25,7 @@ export class BankingService {
 
       return response.data;
     } catch (error) {
-      // @TODO log
-      console.error(error);
+      Logger.log(error.message, 'banking.service.ts');
       throw new InternalServerErrorException(
         'Error interno no serviço de transferência',
       );

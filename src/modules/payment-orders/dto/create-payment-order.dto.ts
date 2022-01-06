@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { Transform } from 'class-transformer';
 import {
   IsDateString,
   IsNotEmpty,
@@ -6,6 +7,8 @@ import {
   IsOptional,
   IsString,
 } from 'class-validator';
+import { TurnIntoCoins } from '../transforms/turn-into-coins/turn-into-coins.transform';
+import { IsValidCurrency } from '../validators/number-of-digits.validator';
 
 export class CreatePaymentOrderDto {
   @ApiProperty({
@@ -22,6 +25,8 @@ export class CreatePaymentOrderDto {
   })
   @IsNumber()
   @IsNotEmpty()
+  @IsValidCurrency({ message: 'Número de casas decimais inválidas' })
+  @Transform(TurnIntoCoins)
   amount: number;
 
   @ApiProperty({
