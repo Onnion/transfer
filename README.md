@@ -9,7 +9,10 @@
 1. [Docker-compose](https://www.digitalocean.com/community/tutorials/how-to-install-docker-compose-on-ubuntu-18-04-pt)
 1. [MockAPI](https://mockapi.io)
 
-Utilize o seguinte template para criar sua banking_api  
+Utilize o seguinte template para criar sua banking_api com a entidade payment-orders, 
+e habilite a opção 'POST'.
+
+Gerando uma url de consulta: `https://{HASH}.mockapi.io/api/payment-orders` 
 ![Diagrama de sequència](/public/assets/docs/images/schema_banking_api.png)
 
 ## Pré requisitos
